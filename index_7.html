@@ -1,0 +1,2199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>doostam · دوستم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #111009;
+  --bg2:     #1a1714;
+  --bg3:     #222018;
+  --ink:     #ede8dc;
+  --ink2:    #a09880;
+  --ink3:    #6a6050;
+  --red:     #e05540;
+  --gold:    #c89a20;
+  --green:   #4a9060;
+  --border:  rgba(237,232,220,0.09);
+  --border2: rgba(237,232,220,0.18);
+  --serif:   'Playfair Display', Georgia, serif;
+  --mono:    'IBM Plex Mono', monospace;
+  --sans:    'IBM Plex Sans', sans-serif;
+  --radius:  8px;
+  --radius2: 12px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.75;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+.masthead {
+  background: rgba(17,16,9,0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.masthead-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  gap: 20px;
+}
+.site-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.3px;
+  line-height: 1;
+  color: var(--ink);
+}
+.site-title .farsi {
+  font-size: 16px;
+  color: var(--ink3);
+  margin-right: 8px;
+  font-style: italic;
+}
+.site-tagline { display: none; }
+
+.tabs {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.4px;
+  padding: 7px 16px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--ink3);
+  white-space: nowrap;
+  transition: all 0.15s;
+  border-right: 1px solid var(--border);
+}
+.tab:last-child { border-right: none; }
+.tab:hover { color: var(--ink); background: var(--bg2); }
+.tab.active { background: var(--ink); color: var(--bg); }
+
+/* ── HERO ── */
+.hero {
+  width: 100%;
+  background: #0a0908;
+  border-bottom: 1px solid var(--border2);
+}
+.hero-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 28px 40px 24px;
+}
+.hero-farsi {
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+  direction: rtl;
+  text-align: left;
+  font-style: italic;
+  opacity: 0.65;
+}
+.hero-sub {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(14px, 1.5vw, 17px);
+  color: rgba(237,232,220,0.52);
+  line-height: 1.55;
+  max-width: 100%;
+  font-weight: 400;
+  
+}
+
+/* ── LAYOUT ── */
+.main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 40px 80px;
+}
+.pane { display: none; padding-top: 52px; }
+.pane.active { display: block; }
+.section { display: none; padding-top: 32px; }
+.section.active { display: block; animation: fadeUp 0.25s ease; }
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .4; transform: scale(1.4); }
+}
+
+/* ── SECTION HEADER ── */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 28px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border2);
+}
+.section-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink3);
+  letter-spacing: 1.5px;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+}
+
+/* ── INDEX ── */
+.idx-hero {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  align-items: start;
+  margin-bottom: 40px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--border);
+}
+.idx-score-wrap { text-align: center; }
+.idx-score-num {
+  font-family: var(--serif);
+  font-size: 76px;
+  font-weight: 400;
+  letter-spacing: -3px;
+  line-height: 1;
+  color: var(--red);
+}
+.idx-score-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--ink3);
+  margin-top: 8px;
+}
+.idx-gauge-bar {
+  width: 160px;
+  height: 6px;
+  background: var(--bg3);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 14px auto 0;
+}
+.idx-gauge-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--green), var(--gold), var(--red));
+  transition: width 1.4s cubic-bezier(.4,0,.2,1);
+}
+.idx-kpis {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.idx-kpi {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius2);
+  padding: 16px 18px;
+}
+.idx-kpi-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--ink3);
+  margin-bottom: 10px;
+}
+.idx-kpi-val {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.idx-kpi-sub { font-size: 12px; color: var(--ink3); }
+
+/* ── FACTOR ROWS ── */
+.factor-list-wrap { margin-bottom: 8px; }
+.factor-row {
+  display: grid;
+  grid-template-columns: 1fr 52px;
+  align-items: start;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+.factor-row:last-child { border-bottom: none; }
+.factor-info { min-width: 0; }
+.factor-name {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.factor-bar-outer {
+  height: 5px;
+  background: var(--bg3);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 7px;
+}
+.factor-bar-inner {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1.3s cubic-bezier(.4,0,.2,1);
+}
+.factor-src {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink3);
+}
+.factor-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  padding-top: 2px;
+}
+.factor-num {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 500;
+}
+.factor-trend { font-size: 15px; font-weight: 600; }
+
+/* ── SIMULATOR ── */
+.sim-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--ink3);
+  margin-bottom: 10px;
+}
+.sim-scenarios { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+.scen-btn {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 6px 14px;
+  border: 1px solid var(--border2);
+  background: transparent;
+  cursor: pointer;
+  color: var(--ink3);
+  border-radius: 20px;
+  transition: all 0.15s;
+  letter-spacing: 0.3px;
+}
+.scen-btn:hover { background: var(--bg2); color: var(--ink); }
+.scen-btn.active-scen { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+.slider-grid { margin-bottom: 32px; }
+.slider-row {
+  display: grid;
+  grid-template-columns: 200px 1fr 38px;
+  align-items: center;
+  gap: 16px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+}
+.slider-row:last-child { border-bottom: none; }
+.sl-name { font-size: 14px; color: var(--ink); }
+.sl-src {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink3);
+  display: block;
+  margin-top: 3px;
+}
+.sl-val {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink3);
+  text-align: right;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 3px;
+  background: var(--bg3);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  background: var(--ink);
+  border-radius: 50%;
+  cursor: pointer;
+}
+input[type=range]::-moz-range-thumb {
+  width: 14px; height: 14px;
+  background: var(--ink);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.result-panel {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius2);
+  padding: 28px;
+  margin-bottom: 32px;
+}
+.result-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.result-cell {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+.result-cell-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--ink3);
+  margin-bottom: 8px;
+}
+.result-cell-val {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.nash-blocks { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 16px 0 20px; }
+.nash-block {
+  border-radius: var(--radius2);
+  padding: 20px 14px;
+  text-align: center;
+  transition: all 0.5s ease;
+}
+.nash-block-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+.nash-block-pct {
+  font-family: var(--serif);
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1;
+}
+.eq-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--ink3);
+  margin-bottom: 10px;
+}
+.insight-box {
+  font-size: 14px;
+  color: var(--ink2);
+  line-height: 1.75;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-style: italic;
+}
+
+/* chart */
+.chart-wrap { position: relative; width: 100%; height: 260px; }
+.chart-section-header {
+  padding: 18px 22px;
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius2);
+  margin: 36px 0 16px;
+}
+.chart-section-label {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.chart-section-sub { font-size: 12px; color: var(--ink3); }
+.chart-legend {
+  display: flex; gap: 20px; flex-wrap: wrap;
+  margin-top: 12px; font-size: 12px; color: var(--ink3);
+}
+.chart-legend span { display: flex; align-items: center; gap: 6px; }
+
+/* ── TIMELINE ── */
+.tl-wrap { position: relative; padding-left: 32px; }
+.tl-spine { position: absolute; left: 7px; top: 8px; bottom: 0; width: 1px; background: var(--border2); }
+.tl-item { position: relative; margin-bottom: 52px; }
+.tl-dot {
+  position: absolute; left: -28px; top: 6px;
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 1px var(--border2);
+  background: var(--bg2);
+}
+.tl-dot.major { background: var(--red); box-shadow: 0 0 0 1px var(--red); }
+.tl-dot.current { background: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
+.tl-year {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--ink3); letter-spacing: 0.5px; margin-bottom: 6px;
+}
+.tl-title {
+  font-family: var(--serif); font-size: 20px;
+  font-weight: 400; margin-bottom: 10px; letter-spacing: -0.3px; color: var(--ink);
+}
+.tl-desc {
+  font-size: 14px; color: var(--ink2); line-height: 1.75;
+  margin-bottom: 12px;
+}
+.tl-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 14px; row-gap: 5px; align-items: center; }
+.tl-tag {
+  font-family: var(--mono); font-size: 10px;
+  padding: 3px 8px;
+  border: 1px solid var(--border2);
+  color: var(--ink3); border-radius: 4px;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+.tl-tag.red { border-color: rgba(224,85,64,.35); color: var(--red); background: rgba(224,85,64,.06); }
+.tl-tag.dark { border-color: rgba(237,232,220,.25); color: var(--ink); background: rgba(237,232,220,.05); }
+.tl-parallel {
+  font-size: 13px; color: var(--ink3); line-height: 1.7;
+  padding: 12px 16px;
+  border-left: 2px solid var(--gold);
+  background: rgba(200,154,32,.05);
+  font-style: italic;
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* ── METHOD BLOCKS (Resilience, Sources, Players) ── */
+.method-block { margin-bottom: 44px; }
+.method-title {
+  font-family: var(--serif); font-size: 20px; font-weight: 400;
+  margin-bottom: 14px; letter-spacing: -0.2px; color: var(--ink);
+}
+.method-body { font-size: 14px; color: var(--ink2); line-height: 1.8; }
+.method-body p { margin-bottom: 14px; }
+.method-body strong { color: var(--ink); font-weight: 500; }
+
+/* Player blocks */
+.player-block {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 36px;
+  margin-bottom: 36px;
+}
+.player-block:last-of-type { border-bottom: none; }
+.player-name {
+  font-family: var(--serif); font-size: 22px; font-weight: 400;
+  letter-spacing: -0.3px; margin-bottom: 20px; color: var(--ink);
+}
+.nash-pill {
+  display: inline-block;
+  font-family: var(--mono); font-size: 10px;
+  padding: 4px 10px; border-radius: 20px;
+  background: var(--bg3); border: 1px solid var(--border2);
+  color: var(--ink3); margin-top: 8px; letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+/* Source table */
+.source-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 16px; }
+.source-table th {
+  font-family: var(--mono); font-size: 10px; text-transform: uppercase;
+  letter-spacing: 0.5px; color: var(--ink3); text-align: left;
+  padding: 10px 14px; border-bottom: 1px solid var(--border2);
+  background: var(--bg2);
+}
+.source-table td {
+  padding: 11px 14px; border-bottom: 1px solid var(--border);
+  vertical-align: top; color: var(--ink2); line-height: 1.6;
+}
+.source-table td:first-child { color: var(--ink); font-weight: 400; }
+.source-table a { color: var(--red); text-decoration: none; }
+.source-table a:hover { text-decoration: underline; }
+
+/* Honest note */
+.honest-note {
+  border: 1px solid var(--border2);
+  border-radius: var(--radius2);
+  padding: 22px 26px;
+  margin-top: 32px;
+  background: var(--bg2);
+}
+.honest-note-title {
+  font-family: var(--mono); font-size: 10px; text-transform: uppercase;
+  letter-spacing: 0.8px; margin-bottom: 12px; color: var(--ink3);
+}
+.honest-note p { font-size: 14px; color: var(--ink2); line-height: 1.8; }
+
+/* ── FOOTER ── */
+.footer {
+  border-top: 1px solid var(--border2);
+  padding: 32px 40px;
+  text-align: center;
+}
+.footer-inner { max-width: 960px; margin: 0 auto; }
+.footer-farsi {
+  font-family: var(--serif); font-style: italic;
+  font-size: 16px; color: var(--ink3); margin-bottom: 6px;
+  direction: rtl;
+}
+.footer-en { font-family: var(--mono); font-size: 11px; color: var(--ink3); letter-spacing: 0.3px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .masthead-inner { padding: 0 20px; height: 52px; }
+  .hero-inner { padding: 20px 20px 18px; }
+  .main { padding: 0 20px 60px; }
+  .footer { padding: 24px 20px; }
+  .idx-hero { grid-template-columns: 1fr; gap: 24px; }
+  .idx-score-num { font-size: 64px; }
+  .idx-kpis { grid-template-columns: 1fr 1fr; }
+  .factor-row { grid-template-columns: 1fr 44px; }
+  .slider-row { grid-template-columns: 1fr 34px; }
+  .slider-row .sl-name { grid-column: 1 / -1; }
+  .result-top { grid-template-columns: 1fr; }
+  .nash-blocks { grid-template-columns: 1fr; gap: 8px; }
+  .nash-block-pct { font-size: 30px; }
+}
+
+/* ── PLAYER ACCENTS ── */
+.player-us    { color: #4a90d9; }
+.player-israel { color: #a0c878; }
+.player-russia { color: #e07050; }
+.player-china  { color: #d4a017; }
+.player-gulf   { color: #c090d0; }
+.player-europe { color: #70b8c0; }
+
+.player-name-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.player-flag {
+  font-size: 26px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.player-name {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.3px;
+  color: var(--ink);
+  margin-bottom: 0;
+}
+
+.nash-position-block {
+  margin-top: 18px;
+  padding: 14px 16px;
+  background: rgba(224,85,64,0.08);
+  border: 1px solid rgba(224,85,64,0.25);
+  border-radius: 8px;
+}
+.nash-position-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--red);
+  margin-bottom: 6px;
+}
+.nash-position-text {
+  font-size: 14px;
+  color: var(--ink2);
+  line-height: 1.7;
+}
+
+.player-meta-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--gold);
+  margin-bottom: 5px;
+  margin-top: 16px;
+}
+.player-meta-text {
+  font-size: 14px;
+  color: var(--ink2);
+  line-height: 1.75;
+}
+
+/* ── TL improvements ── */
+.tl-year { color: var(--gold); font-size: 12px; letter-spacing: 1px; }
+
+/* ── Index kpi accent ── */
+.kpi-accent-red  { color: var(--red); }
+.kpi-accent-gold { color: var(--gold); }
+
+/* ── RESILIENCE LAYERS ── */
+.layer-card {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 20px 22px;
+  margin-bottom: 12px;
+  position: relative;
+}
+.layer-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--ink3);
+  margin-bottom: 6px;
+}
+.layer-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.layer-body { font-size: 14px; color: var(--ink2); line-height: 1.75; }
+.layer-card.l1 { border-left: 3px solid var(--gold); }
+.layer-card.l2 { border-left: 3px solid var(--red); }
+.layer-card.l3 { border-left: 3px solid #4a90d9; }
+
+/* ── CONDITION TABLE (what needs to happen) ── */
+.condition-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+.condition-row {
+  display: grid;
+  grid-template-columns: 1fr 140px 1fr;
+  gap: 12px;
+  align-items: start;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 13px;
+}
+.condition-name { font-weight: 500; color: var(--ink); margin-bottom: 3px; }
+.condition-status {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-align: center;
+  padding: 4px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.cs-partial { background: rgba(212,160,23,.15); color: var(--gold); border: 1px solid rgba(212,160,23,.3); }
+.cs-critical { background: rgba(224,85,64,.12); color: var(--red); border: 1px solid rgba(224,85,64,.3); }
+.cs-no { background: rgba(237,232,220,.05); color: var(--ink3); border: 1px solid var(--border2); }
+.condition-trigger { font-size: 12px; color: var(--ink3); line-height: 1.6; }
+
+/* ── SIMULATOR HIGHLIGHT ── */
+.sim-intro-banner {
+  background: linear-gradient(135deg, rgba(224,85,64,.08), rgba(212,160,23,.05));
+  border: 1px solid rgba(224,85,64,.2);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.sim-intro-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+.sim-intro-text { font-size: 14px; color: var(--ink2); line-height: 1.65; }
+.sim-intro-text strong { color: var(--ink); font-weight: 500; }
+
+/* ── NASH BLOCK improvements ── */
+.nash-block-label { color: var(--ink2); }
+
+/* ── REGIME COMPARISON cards ── */
+.regime-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
+.regime-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.regime-card-name { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.regime-card-years { font-family: var(--mono); font-size: 11px; color: var(--ink3); margin-bottom: 8px; }
+.regime-card-how { font-size: 12px; color: var(--ink2); line-height: 1.6; }
+.regime-card.ongoing { border-color: rgba(224,85,64,.3); border-left: 3px solid var(--red); }
+
+/* ── SECTION dividers for method blocks ── */
+.method-block + .method-block { border-top: 1px solid var(--border); padding-top: 36px; }
+.method-block:first-of-type { border-top: none; padding-top: 0; }
+
+@media(max-width:100%) {
+  .condition-row { grid-template-columns: 1fr; }
+  .regime-cards { grid-template-columns: 1fr; }
+}
+
+/* ── COLOR ACCENTS ── */
+.green { color: #4a9060; }
+.blue  { color: #4a90d9; }
+.purple { color: #c890d0; }
+.gold  { color: var(--gold); }
+.red   { color: var(--red); }
+
+.source-table td a { color: var(--red); }
+.source-table td:nth-child(2) { color: var(--red); }
+
+.method-block + .method-block {
+  border-top: 1px solid var(--border);
+  padding-top: 36px;
+}
+
+/* ── MOBILE FIXES ── */
+@media (max-width: 640px) {
+  /* Hero text wraps on mobile */
+  .hero-sub { white-space: normal; font-size: 15px; }
+  .hero-farsi { font-size: 13px; }
+  .hero-inner { padding: 24px 20px 20px; }
+
+  /* Nav */
+  .masthead-inner { padding: 0 16px; height: 48px; }
+  .tabs { flex-shrink: 1; }
+  .tab { font-size: 10px; padding: 6px 10px; }
+
+  /* Main content */
+  .main { padding: 0 16px 60px; }
+  .section { padding-top: 24px; }
+  .section-title { font-size: 24px; }
+
+  /* Index */
+  .idx-hero { grid-template-columns: 1fr; gap: 20px; }
+  .idx-kpis { grid-template-columns: 1fr 1fr; }
+  .idx-score-num { font-size: 56px; }
+
+  /* Factors */
+  .factor-row { grid-template-columns: 1fr 40px; gap: 10px; }
+
+  /* Simulator */
+  .slider-row { grid-template-columns: 1fr 32px; gap: 8px; }
+  .result-top { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .result-cell-val { font-size: 22px; }
+  .nash-blocks { grid-template-columns: 1fr; gap: 8px; }
+  .nash-block-pct { font-size: 30px; }
+  .nash-block { padding: 14px 12px; }
+  .result-panel { padding: 18px 16px; }
+
+  /* Players map */
+  #players-map svg { min-height: 280px; }
+  #player-info { padding: 14px 16px; }
+  #player-info-inner > div:last-child { grid-template-columns: 1fr !important; gap: 12px !important; }
+
+  /* Condition grid */
+  .condition-row { grid-template-columns: 1fr !important; gap: 6px; }
+
+  /* Regime cards */
+  .regime-cards { grid-template-columns: 1fr; }
+
+  /* Layer cards */
+  .layer-card { padding: 14px 16px; }
+
+  /* History Goldstone cards */
+  div[style*="grid-template-columns:1fr 1fr 1fr"] { 
+    grid-template-columns: 1fr !important; 
+  }
+
+  /* Timeline */
+  .tl-wrap { padding-left: 24px; }
+  .tl-title { font-size: 18px; }
+  .tl-desc { font-size: 13px; }
+
+  /* Footer */
+  .footer { padding: 20px 16px; }
+
+  /* Players section */
+  .player-name { font-size: 18px; }
+  .nash-position-block { padding: 12px 14px; }
+
+  /* Chart */
+  .chart-wrap { height: 200px; }
+
+  /* Honest note */
+  .honest-note { padding: 16px 18px; }
+}
+
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div>
+      <div class="site-title"><span class="farsi">دوستم</span> doostam</div>
+      <div class="site-tagline">Understanding, not predicting</div>
+    </div>
+    <nav class="tabs">
+      <button class="tab active" onclick="showSection('index', this)">Index</button>
+      <button class="tab" onclick="showSection('simulator', this)">Simulator</button>
+      <button class="tab" onclick="showSection('players', this)">Players</button>
+      <button class="tab" onclick="showSection('resilience', this)">The system</button>
+      <button class="tab" onclick="showSection('history', this)">Iran since 1979</button>
+      <button class="tab" onclick="showSection('method', this)">Sources</button>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-farsi">برای دوستم — که منتظر فرداست</div>
+    <p class="hero-sub">A place of care, built for a friend who reads every source, watches every map, and still needs somewhere to make sense of it all.</p>
+  </div>
+</div>
+
+<main class="main">
+
+<!-- ══ INDEX ══ -->
+<section class="section active" id="sec-index">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Instability index</h2>
+  </div>
+
+  <div class="idx-hero">
+    <div class="idx-score-wrap">
+      <div class="idx-score-num" id="idx-composite" style="color:var(--red)">—</div>
+      <div class="idx-score-label" id="idx-state-label">out of 100</div>
+      <div class="idx-gauge-bar"><div class="idx-gauge-fill" id="idx-gauge-fill" style="width:0%"></div></div>
+    </div>
+    <div class="idx-kpis">
+      <div class="idx-kpi" style="padding:16px 18px">
+        <div class="idx-kpi-label" style="color:#4a90d9">Nash state</div>
+        <div class="idx-kpi-val" id="idx-nash" style="font-size:16px;padding-top:2px">—</div>
+        <div class="idx-kpi-sub">dominant equilibrium</div>
+      </div>
+      <div class="idx-kpi" style="padding:16px 18px">
+        <div class="idx-kpi-label" style="color:var(--red)">Fiscal stress</div>
+        <div class="idx-kpi-val" id="idx-fiscal" style="color:var(--red)">—</div>
+        <div class="idx-kpi-sub">IRGC payment capacity</div>
+      </div>
+      <div class="idx-kpi" style="grid-column:1/-1">
+        <div class="idx-kpi-label" style="color:#4a9060">Goldstone conditions</div>
+        <div style="display:flex;align-items:baseline;gap:8px">
+          <div class="idx-kpi-val" id="idx-goldstone">—</div>
+          <div class="idx-kpi-sub">of 3 preconditions present simultaneously</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="factor-list-wrap" id="factor-list"></div>
+
+  <p style="font-size:11px;color:var(--ink3);font-style:italic;margin-top:16px">
+    One analytical model, not a forecast. Political change is nonlinear and unpredictable. The factors still matter.
+  </p>
+</section>
+
+<!-- ══ PLAYERS ══ -->
+<section class="section" id="sec-players">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">The players</h2>
+  </div>
+
+  <!-- INTERACTIVE MAP -->
+  <div id="players-map" style="background:var(--bg2);border:1px solid var(--border2);border-radius:12px;margin-bottom:44px;overflow:hidden">
+    <div style="padding:16px 20px 0;display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:8px">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--red);display:inline-block;animation:pulse-dot 1.8s ease-in-out infinite"></span>
+          <div style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--ink2)">Click any actor to see their Nash position below</div>
+        </div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--ink3)"><span style="color:rgba(224,85,64,.7)">- - -</span> conflict &nbsp;&nbsp; <span style="color:rgba(74,144,93,.7)">———</span> aligned</div>
+    </div>
+    <svg id="players-svg" viewBox="0 0 880 400" style="width:100%;display:block" role="img" aria-label="Interactive map of actors in the Iran conflict"></svg>
+    <!-- Info panel -->
+    <div id="player-info" style="padding:20px 24px;border-top:1px solid var(--border2);min-height:110px;transition:all .3s ease;background:rgba(237,232,220,.02)">
+      <div id="player-info-inner" style="font-size:14px;color:var(--ink3);font-style:italic;display:flex;align-items:center;gap:10px">
+        <span style="font-size:22px">↑</span>
+        <span>Click any actor on the map to see what they want, what they fear, and what their dominant strategy is.</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    const players = [
+      {
+        id:'us', flag:'🇺🇸', label:'USA', x:160, y:120, color:'#4a90d9',
+        want: 'Fast exit before November 3 midterms. Republicans hold 218–214 in the House.',
+        tension: 'War depletes interceptor stocks, risks inflation. Inflation cost Democrats 2024.',
+        nash: 'Before summer: escalate. After September: any deal that looks like a win. The clock is running.',
+      },
+      {
+        id:'israel', flag:'🇮🇱', label:'Israel', x:340, y:80, color:'#a0c878',
+        want: 'Permanent elimination of Iran\'s nuclear program. Khamenei\'s death achieved the maximum target.',
+        tension: 'US window closes in September. Washington wants out — Tel Aviv wants to keep pressure on.',
+        nash: 'Use the US window while it lasts. Find reasons to resume if ceasefire doesn\'t produce verified dismantlement.',
+      },
+      {
+        id:'iran', flag:'🇮🇷', label:'Iran', x:520, y:200, color:'#e05540',
+        want: 'Regime survival. Succession consolidation. Time for Mojtaba to establish legitimacy.',
+        tension: 'Mojtaba Khamenei named March 8. Has issued written statements but never appeared in person. Intelligence memos report he is incapacitated in Qom, unable to participate in decisions. Real power held by IRGC wartime council.',
+        nash: 'Survive the succession. Accept ceasefire to buy time. Use executions to suppress internal threat.',
+      },
+      {
+        id:'russia', flag:'🇷🇺', label:'Russia', x:700, y:80, color:'#e07050',
+        want: 'War to continue. Hormuz crisis raised oil from below $10bn/month to +$45–151bn in 2026.',
+        tension: 'Every day the US is in Iran is a day not focused on Ukraine.',
+        nash: 'Silence, verbal condemnation, financial benefit. No direct involvement. Ceasefire is bad news — oil fell 16%.',
+      },
+      {
+        id:'china', flag:'🇨🇳', label:'China', x:750, y:260, color:'#d4a017',
+        want: 'Hormuz stability — 45% of its oil passes through. Iran supplies 13% at below-market prices.',
+        tension: 'US distraction helps Taiwan window. But 25% oil rise cuts GDP by 0.5%.',
+        nash: 'Strategic ambiguity. Supply Iran enough to keep it functional as a US drain, not enough to be drawn in.',
+      },
+      {
+        id:'gulf', flag:'🛢️', label:'Gulf', x:420, y:330, color:'#c890d0',
+        want: 'High oil prices, short war, Iranian oil off the market permanently.',
+        tension: 'Bahrain airspace closed. Hormuz passes through their neighbourhood.',
+        nash: 'A short decisive win with Iran\'s oil market share captured. Ceasefire that restores Iranian production is bad.',
+      },
+      {
+        id:'europe', flag:'🇪🇺', label:'Europe', x:160, y:300, color:'#70b8c0',
+        want: 'War to end quickly. Lufthansa suspended Tehran flights to Oct 2026. 3–6hr rerouting costs.',
+        tension: 'No leverage. Depends on US security. Maximum sanctions already in place.',
+        nash: 'Push for ceasefire publicly, do nothing that damages US relations. A spectator with loud opinions.',
+      },
+    ];
+
+    // Conflict lines: [a, b, type] — type: 'conflict'|'aligned'
+    const edges = [
+      ['us','israel','aligned'],
+      ['us','russia','conflict'],
+      ['us','china','conflict'],
+      ['us','iran','conflict'],
+      ['israel','iran','conflict'],
+      ['russia','china','aligned'],
+      ['russia','iran','aligned'],
+      ['china','iran','aligned'],
+      ['gulf','iran','conflict'],
+      ['gulf','us','aligned'],
+      ['europe','us','aligned'],
+      ['europe','russia','conflict'],
+    ];
+
+    const svg = document.getElementById('players-svg');
+    if(!svg) return;
+
+    // Draw edges first
+    edges.forEach(([a, b, type]) => {
+      const pa = players.find(p=>p.id===a);
+      const pb = players.find(p=>p.id===b);
+      if(!pa||!pb) return;
+      const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1', pa.x); line.setAttribute('y1', pa.y);
+      line.setAttribute('x2', pb.x); line.setAttribute('y2', pb.y);
+      line.setAttribute('stroke', type==='conflict' ? 'rgba(224,85,64,.25)' : 'rgba(74,144,93,.2)');
+      line.setAttribute('stroke-width', '1.5');
+      line.setAttribute('stroke-dasharray', type==='conflict' ? '4,4' : '0');
+      svg.appendChild(line);
+    });
+
+    // Draw nodes
+    players.forEach(p => {
+      const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+      g.style.cursor = 'pointer';
+
+      // Glow circle
+      const glow = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      glow.setAttribute('cx', p.x); glow.setAttribute('cy', p.y); glow.setAttribute('r', 34);
+      glow.setAttribute('fill', p.color); glow.setAttribute('opacity', '0.07');
+      g.appendChild(glow);
+
+      // Main circle
+      const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      circle.setAttribute('cx', p.x); circle.setAttribute('cy', p.y); circle.setAttribute('r', 26);
+      circle.setAttribute('fill', 'rgba(26,23,16,.9)');
+      circle.setAttribute('stroke', p.color); circle.setAttribute('stroke-width', '1.5');
+      g.appendChild(circle);
+
+      // Flag emoji
+      const text = document.createElementNS('http://www.w3.org/2000/svg','text');
+      text.setAttribute('x', p.x); text.setAttribute('y', p.y + 7);
+      text.setAttribute('text-anchor','middle'); text.setAttribute('font-size','20');
+      text.textContent = p.flag;
+      g.appendChild(text);
+
+      // Label below
+      const label = document.createElementNS('http://www.w3.org/2000/svg','text');
+      label.setAttribute('x', p.x); label.setAttribute('y', p.y + 44);
+      label.setAttribute('text-anchor','middle');
+      label.setAttribute('font-size','11');
+      label.setAttribute('font-family','IBM Plex Mono, monospace');
+      label.setAttribute('fill', p.color);
+      label.setAttribute('letter-spacing','0.5');
+      label.textContent = p.label;
+      g.appendChild(label);
+
+      g.addEventListener('click', () => selectPlayer(p));
+      g.addEventListener('mouseenter', () => {
+        circle.setAttribute('stroke-width','2.5');
+        glow.setAttribute('opacity','0.15');
+      });
+      g.addEventListener('mouseleave', () => {
+        circle.setAttribute('stroke-width','1.5');
+        glow.setAttribute('opacity','0.07');
+      });
+
+      svg.appendChild(g);
+    });
+
+    function selectPlayer(p) {
+      document.getElementById('player-info-inner').innerHTML = `
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border)">
+          <span style="font-size:24px">${p.flag}</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:${p.color};font-weight:500">${p.label}</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;font-size:13px">
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--gold);margin-bottom:6px">What it wants</div>
+            <div style="color:rgba(237,232,220,.8);line-height:1.65">${p.want}</div>
+          </div>
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--gold);margin-bottom:6px">The tension</div>
+            <div style="color:rgba(237,232,220,.8);line-height:1.65">${p.tension}</div>
+          </div>
+          <div style="background:rgba(224,85,64,.06);border:1px solid rgba(224,85,64,.2);border-radius:6px;padding:10px 12px">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--red);margin-bottom:6px">Nash position</div>
+            <div style="color:rgba(237,232,220,.8);line-height:1.65">${p.nash}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Add legend
+    const legendY = 375;
+    const lg = document.createElementNS('http://www.w3.org/2000/svg','g');
+    const ln1 = document.createElementNS('http://www.w3.org/2000/svg','line');
+    ln1.setAttribute('x1','30');ln1.setAttribute('y1',legendY);ln1.setAttribute('x2','55',);ln1.setAttribute('y2',legendY);
+    ln1.setAttribute('stroke','rgba(224,85,64,.5)');ln1.setAttribute('stroke-width','1.5');ln1.setAttribute('stroke-dasharray','4,4');
+    lg.appendChild(ln1);
+    const lt1 = document.createElementNS('http://www.w3.org/2000/svg','text');
+    lt1.setAttribute('x','62');lt1.setAttribute('y',legendY+4);lt1.setAttribute('font-size','10');lt1.setAttribute('fill','rgba(237,232,220,.4)');lt1.setAttribute('font-family','IBM Plex Mono,monospace');
+    lt1.textContent='conflict';lg.appendChild(lt1);
+    const ln2 = document.createElementNS('http://www.w3.org/2000/svg','line');
+    ln2.setAttribute('x1','120');ln2.setAttribute('y1',legendY);ln2.setAttribute('x2','145');ln2.setAttribute('y2',legendY);
+    ln2.setAttribute('stroke','rgba(74,144,93,.5)');ln2.setAttribute('stroke-width','1.5');
+    lg.appendChild(ln2);
+    const lt2 = document.createElementNS('http://www.w3.org/2000/svg','text');
+    lt2.setAttribute('x','152');lt2.setAttribute('y',legendY+4);lt2.setAttribute('font-size','10');lt2.setAttribute('fill','rgba(237,232,220,.4)');lt2.setAttribute('font-family','IBM Plex Mono,monospace');
+    lt2.textContent='aligned';lg.appendChild(lt2);
+    svg.appendChild(lg);
+  })();
+  </script>
+
+  <p style="font-size:15px;color:var(--ink2);margin-bottom:40px;line-height:1.75;">Every actor in this conflict has a calculation. Those calculations shape what happens next as much as anything inside Iran.</p>
+  <div class="method-block player-block">
+    <div class="player-name-wrap">
+      <span class="player-flag">🇺🇸</span>
+      <span class="player-name player-us">United States · Trump</span>
+    </div>
+    <div class="player-meta-label">What it wants</div>
+    <div class="player-meta-text">A fast, decisive outcome before November 3, 2026: the midterm elections. All 435 House seats are contested. Republicans hold a narrow majority (218–214). Historically, the president's party loses an average of 26 House seats in midterms. A prolonged, expensive war would hand Democrats exactly the argument they need.</div>
+    <div class="player-meta-label">The tension</div>
+    <div class="player-meta-text">Trump ran on ending foreign entanglements. The war depletes US interceptor missile stockpiles, disrupts global energy, and risks inflation returning. If oil prices stay high, inflation comes back. And inflation is what cost Democrats the 2024 election. He knows this.</div>
+    <div class="player-meta-label">The calculation</div>
+    <div class="player-meta-text">Before summer: willing to escalate. After September: strong pressure toward any deal he can sell as a win. The midterm clock is running.</div>
+    <div class="nash-position-block">
+      <div class="nash-position-label">Nash position</div>
+      <div class="nash-position-text">Trump's dominant strategy shifts as November 3 approaches. The window for escalation closes by late summer.</div>
+    </div>
+  </div>
+
+  <!-- Israel -->
+  <div class="method-block player-block">
+    <div class="player-name-wrap">
+      <span class="player-flag">🇮🇱</span>
+      <span class="player-name player-israel">Israel</span>
+    </div>
+    <div class="player-meta-label">What it wants</div>
+    <div class="player-meta-text">Permanent elimination of Iran's nuclear program and degradation of IRGC capacity. Khamenei's death achieved the maximum target. Now the question is whether the successor regime reconstitutes the threat.</div>
+    <div class="player-meta-label">The calculation</div>
+    <div class="player-meta-text">Israel has no midterm election pressure. It can afford a longer timeline than the US. Washington may want out by September — Tel Aviv may want to keep pressure on until the succession crisis resolves in a direction it prefers. This creates potential divergence between the two allies.</div>
+    <div class="nash-position-block">
+      <div class="nash-position-label">Nash position</div>
+      <div class="nash-position-text">Use the US window while it lasts. Every week of ceasefire is a week Iran can reorganise. Israel has incentive to find reasons to resume if the ceasefire does not produce verifiable dismantlement.</div>
+    </div>
+  </div>
+
+  <!-- Russia -->
+  <div class="method-block player-block">
+    <div class="player-name-wrap">
+      <span class="player-flag">🇷🇺</span>
+      <span class="player-name player-russia">Russia</span>
+    </div>
+    <div class="player-meta-label">What it wants</div>
+    <div class="player-meta-text">The war to continue as long as possible without direct Russian involvement. Before the conflict, Russia's oil export earnings had fallen below $10 billion in February 2026. The Strait of Hormuz crisis sent prices sharply up — Russia earns an estimated $45–151 billion in additional revenue in 2026 (KSE Institute). Every day the US is in Iran is a day it is not focused on Ukraine.</div>
+    <div class="player-meta-label">The calculation</div>
+    <div class="player-meta-text">Silence, verbal condemnation, financial benefit, no escalation. China and Russia vetoed the UN Security Council resolution on Hormuz. The ceasefire is bad news for Moscow — oil prices fell 16% the day it was announced.</div>
+    <div class="nash-position-block">
+      <div class="nash-position-label">Nash position</div>
+      <div class="nash-position-text">Prolongation without involvement. Russia has no incentive to help end the war.</div>
+    </div>
+  </div>
+
+  <!-- China -->
+  <div class="method-block player-block">
+    <div class="player-name-wrap">
+      <span class="player-flag">🇨🇳</span>
+      <span class="player-name player-china">China</span>
+    </div>
+    <div class="player-meta-label">What it wants</div>
+    <div class="player-meta-text">Stability in the Strait of Hormuz: 45% of its oil imports pass through it. Iran supplies ~13% of China's oil at below-market prices under a 25-year $400 billion agreement signed in 2021. China stockpiled aggressively in January–February 2026 (imports up 16%), building ~104 days of reserves.</div>
+    <div class="player-meta-label">The tension</div>
+    <div class="player-meta-text">China benefits from US distraction: every month Washington is in the Middle East, Beijing gains time in the Taiwan Strait without scrutiny. But a prolonged Hormuz closure harms the Chinese economy. A 25% rise in oil prices reduces China's GDP by ~0.5%.</div>
+    <div class="player-meta-label">The calculation</div>
+    <div class="player-meta-text">China wants the conflict to simmer, not boil. It has been supplying Iran with drone components and dual-use technology through the "Axis of Evasion" supply chain, while publicly presenting itself as a neutral peace mediator. The Trump-Xi summit, originally scheduled for April, has been postponed to May.</div>
+    <div class="nash-position-block">
+      <div class="nash-position-label">Nash position</div>
+      <div class="nash-position-text">Strategic ambiguity: support Iran enough to keep it functional as a US drain, not enough to be drawn in directly.</div>
+    </div>
+  </div>
+
+  <!-- Gulf -->
+  <div class="method-block player-block">
+    <div class="player-name-wrap">
+      <span class="player-flag">🛢️</span>
+      <span class="player-name player-gulf">Saudi Arabia and Gulf states</span>
+    </div>
+    <div class="player-meta-label">What they want</div>
+    <div class="player-meta-text">High oil prices, but not so high they crash global demand. Iran's oil off the market benefits Saudi Arabia directly. Before the conflict, Saudi Arabia was second-largest supplier to China (14.9%). Now it has room to expand market share.</div>
+    <div class="player-meta-label">The tension</div>
+    <div class="player-meta-text">Saudi Arabia and Gulf states fear Iranian retaliation: Bahrain closed its airspace, Kuwait suspended flights. The Strait of Hormuz passes through their neighbourhood. A prolonged conflict that damages Gulf infrastructure is not in their interest.</div>
+    <div class="nash-position-block">
+      <div class="nash-position-label">Nash position</div>
+      <div class="nash-position-text">A short war with high prices and Iranian oil permanently off the market. A ceasefire that restores Iranian production is bad for their market position.</div>
+    </div>
+  </div>
+
+  <!-- Europe -->
+  <div class="method-block player-block">
+    <div class="player-name-wrap">
+      <span class="player-flag">🇪🇺</span>
+      <span class="player-name player-europe">Europe</span>
+    </div>
+    <div class="player-meta-label">What it wants</div>
+    <div class="player-meta-text">The war to end quickly. European carriers (Lufthansa suspended Tehran flights until October 2026) face massive rerouting costs. Europe-Asia flights add 3–6 hours and significant fuel costs when avoiding Middle East airspace.</div>
+    <div class="player-meta-label">The calculation</div>
+    <div class="player-meta-text">Europe has no leverage. It opposes the war diplomatically but depends on US security. Its main tool is economic pressure — and Iran is already under maximum sanctions. Europe's role is peripheral.</div>
+    <div class="nash-position-block">
+      <div class="nash-position-label">Nash position</div>
+      <div class="nash-position-text">Push for ceasefire publicly while doing nothing that would damage US relations. A spectator with loud opinions.</div>
+    </div>
+  </div>
+
+  <div style="padding:22px 26px;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;margin-top:8px">
+    <div style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--ink3);margin-bottom:12px">The Nash equilibrium of the external game</div>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.8;max-width:100%">Each player's dominant strategy points in a different direction. The US wants a fast exit before November. Israel wants sustained pressure. Russia wants prolongation. China wants controlled ambiguity. Saudi Arabia wants Iranian oil off the market. No single actor controls the outcome. The ceasefire of April 7 satisfies none of them fully. That is both its fragility and its function: a pause, not an equilibrium.</p>
+  </div>
+</section>
+
+
+<!-- ══ RESILIENCE ══ -->
+<section class="section" id="sec-resilience">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">The system</h2>
+  </div>
+
+  <div style="padding:16px 20px;border-left:3px solid var(--gold);background:rgba(212,160,23,.05);border-radius:0 8px 8px 0;margin-bottom:20px">
+    <p style="font-size:13px;color:var(--ink3);line-height:1.7;font-style:italic">Jack Goldstone studied 500 years of revolutions and found three conditions appear together in nearly every case of state collapse: <span style="color:#4a90d9">elite defection</span>, <span style="color:var(--gold)">multi-class coalition</span>, <span style="color:var(--red)">fiscal crisis</span>. Iran in April 2026 has all three — partially and simultaneously. That has never happened before in its history. The question is whether they converge faster than the regime adapts.</p>
+  </div>
+
+  <p style="font-size:15px;color:var(--ink2);margin-bottom:20px;line-height:1.75">The Islamic Republic survived the death of its supreme leader, the loss of its proxy network, economic collapse, mass protests, and external strikes. That is not luck. It was engineered.</p>
+
+  <!-- THREE LAYERS -->
+  <div class="method-block">
+    <h3 class="method-title">Three interlocking layers</h3>
+    <div style="margin-top:16px;display:flex;flex-direction:column;gap:10px">
+      <div class="layer-card l1">
+        <div class="layer-num">Layer 01</div>
+        <div class="layer-title">Religious legitimacy</div>
+        <div class="layer-body">The Supreme Leader, the Assembly of Experts (88 senior clerics), and the Guardian Council which vets every candidate for office. When Khamenei was killed, the Assembly moved within 8 days to appoint Mojtaba. The mechanism worked exactly as designed. Not despite the assassination, but through it.</div>
+      </div>
+      <div class="layer-card l2">
+        <div class="layer-num">Layer 02</div>
+        <div class="layer-title">The IRGC — military and economic empire</div>
+        <div class="layer-body">Not just a military force. The IRGC controls an estimated 50%+ of Iran's GDP through bonyads: revolutionary foundations turned corporate conglomerates in construction, mining, telecoms, real estate, and smuggling. A 2004 constitutional amendment allowed IRGC-affiliated organisations to control up to 80% of major economic sectors. If the regime falls, commanders lose everything and face criminal prosecution. This is not ideology. It is survival calculus.</div>
+      </div>
+      <div class="layer-card l3">
+        <div class="layer-num">Layer 03</div>
+        <div class="layer-title">The bureaucracy</div>
+        <div class="layer-body">The government, presidency, judiciary, and administrative apparatus that keeps daily functions running regardless of who sits at the top. This prevented collapse after Khamenei's death — the state continued at the operational level while succession was resolved at the theological level.</div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--ink3);margin-top:14px;font-style:italic">These layers overlap: IRGC officers sit in parliament. Clerics lead military ideological bureaus. No single shock can take down all three simultaneously.</p>
+  </div>
+
+  <!-- REGIME TYPE TABLE -->
+  <div class="method-block">
+    <h3 class="method-title">What makes Iran different</h3>
+    <p style="font-size:14px;color:var(--ink2);margin-bottom:16px;line-height:1.75">Barbara Geddes (UCLA) built the largest dataset of authoritarian regime types. Her finding: regime type predicts durability more than any other factor.</p>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -4px"><table class="source-table" style="min-width:500px">
+      <thead><tr><th>Type</th><th>Example</th><th>Avg lifespan</th><th>How it falls</th></tr></thead>
+      <tbody>
+        <tr><td>Personalist</td><td>Gaddafi, Saddam</td><td>15–20 yrs</td><td>Remove the leader → immediate collapse. No institutions survive him.</td></tr>
+        <tr><td>Military junta</td><td>Argentina 1976–83</td><td>8–10 yrs</td><td>Economic failure → internal splits → negotiated exit. Most fragile type.</td></tr>
+        <tr><td>Single-party</td><td>USSR, PRI Mexico</td><td>40–70 yrs</td><td>Elite fracture or fiscal collapse after prolonged erosion.</td></tr>
+        <tr><td style="color:var(--red)">Revolutionary-ideological</td><td>Cuba, Vietnam, <strong style="color:var(--ink)">Iran</strong></td><td>Longest of all</td><td>Almost never falls to external pressure alone. Requires all conditions simultaneously.</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px;color:var(--ink3);margin-top:12px;font-style:italic">Levitsky and Way (Harvard/Toronto): regimes born from violent social revolution are the most durable of all authoritarian types. Their founding destroys alternative power centres and forges institutions specifically designed to prevent reversal.</p>
+  </div>
+
+  <!-- MOHAREB -->
+  <div class="method-block">
+    <h3 class="method-title">The mohareb mechanism</h3>
+    <div style="background:rgba(224,85,64,.06);border:1px solid rgba(224,85,64,.2);border-radius:10px;padding:18px 20px;margin-top:14px">
+      <p style="font-size:14px;color:var(--ink2);line-height:1.8">The regime calls protesters <em>mohareb</em> — enemies of God. Not a political label. A religious one. It means killing them is not only allowed but required by faith. Senior cleric Ali Saeedi said it out loud: defending the Islamic government "justifies the deaths of thousands." So when a soldier gets the order to fire, there is no internal voice saying this is wrong. Religion already answered that question. This is why 2019 killed 500+ people in days. And why 2022 went on for months. The moral brake that makes soldiers hesitate in other regimes has been removed.</p>
+    </div>
+  </div>
+
+  <!-- COMPARATIVE LIFESPANS -->
+  <div class="method-block">
+    <h3 class="method-title">Comparative lifespans</h3>
+    <div class="regime-cards">
+      <div class="regime-card">
+        <div class="regime-card-name">Soviet Union</div>
+        <div class="regime-card-years"><span style="color:var(--gold)">74 years · 1917–1991</span></div>
+        <div class="regime-card-how">Fiscal collapse + Gorbachev reforms + elite defection</div>
+      </div>
+      <div class="regime-card">
+        <div class="regime-card-name">Cuba</div>
+        <div class="regime-card-years"><span style="color:var(--gold)">65+ years · 1959–present</span></div>
+        <div class="regime-card-how">Has not fallen. Revolutionary-ideological type.</div>
+      </div>
+      <div class="regime-card">
+        <div class="regime-card-name">PRI Mexico</div>
+        <div class="regime-card-years"><span style="color:var(--gold)">71 years · 1929–2000</span></div>
+        <div class="regime-card-how">Gradual electoral erosion, negotiated exit</div>
+      </div>
+      <div class="regime-card">
+        <div class="regime-card-name">Gaddafi / Libya</div>
+        <div class="regime-card-years"><span style="color:var(--gold)">42 years · 1969–2011</span></div>
+        <div class="regime-card-how">NATO intervention + tribal defections + civil war</div>
+      </div>
+      <div class="regime-card">
+        <div class="regime-card-name">Saddam / Iraq</div>
+        <div class="regime-card-years"><span style="color:var(--gold)">24 years · 1979–2003</span></div>
+        <div class="regime-card-how">US invasion — collapsed in 3 weeks. Personalist: no institutions survived him.</div>
+      </div>
+      <div class="regime-card">
+        <div class="regime-card-name">Assad / Syria</div>
+        <div class="regime-card-years"><span style="color:var(--gold)">54 years · 1971–2024</span></div>
+        <div class="regime-card-how">Russia withdrawal + Hezbollah weakened + rebel offensive — all three pillars simultaneously.</div>
+      </div>
+    </div>
+    <div class="regime-card ongoing" style="margin-top:10px">
+      <div class="regime-card-name" style="color:var(--red)">Islamic Republic of Iran</div>
+      <div class="regime-card-years"><span style="color:var(--gold)">47 years · 1979–present</span></div>
+      <div class="regime-card-how">Ongoing. Supreme leader killed February 2026. Succession completed in 8 days. State functions continued.</div>
+    </div>
+    <p style="font-size:14px;color:var(--ink2);margin-top:16px;line-height:1.8">The China comparison: the CCP held power since 1949 by doing what Iran cannot — separating economic growth from ideology. Deng Xiaoping freed the economy while keeping political control. The regime bought legitimacy through results. 800 million lifted from poverty. Iran went the opposite direction: sanctions and IRGC economic capture destroyed the middle class. No growth to offer. Only ideology and fear.</p>
+  </div>
+
+
+
+    <!-- LEADERLESS OPPOSITION -->
+  <div class="method-block">
+    <h3 class="method-title">The opposition with no face</h3>
+    <div class="method-body" style="max-width:none !important">
+      <p style="margin-bottom:12px">Every opposition movement that succeeded in the 20th century had a face. Mandela. Walesa. Havel. Khomeini himself. Iran's opposition today has none. No organisation, no unified leadership, no agreed programme for what comes after. This is partly by design — the regime imprisoned or exiled everyone who tried to lead.</p>
+      <p style="margin-bottom:12px">What remains is harder to classify: a generation, young, urban, educated, female-led, that refuses the entire framework of the Islamic Republic, not just its current leaders. They don't want reform. They want a different country. But they can't coordinate because coordination requires communication, and communication is cut the moment protests begin.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px">
+        <div style="background:rgba(224,85,64,.06);border:1px solid rgba(224,85,64,.2);border-radius:8px;padding:14px 16px">
+          <div style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--red);margin-bottom:8px">The weakness</div>
+          <div style="font-size:13px;color:var(--ink2);line-height:1.7">A leaderless movement can't negotiate, can't present demands, can't give the regime an off-ramp. That's why 2022 produced no political result despite being the largest uprising since 1979.</div>
+        </div>
+        <div style="background:rgba(74,144,93,.06);border:1px solid rgba(74,144,93,.2);border-radius:8px;padding:14px 16px">
+          <div style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:#4a9060;margin-bottom:8px">The strange strength</div>
+          <div style="font-size:13px;color:var(--ink2);line-height:1.7">A movement with no head can't be decapitated. Arrest 50,000 people and it still exists, distributed across millions of private decisions not to comply, not to pretend, not to perform loyalty.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXECUTIONS -->
+  <div class="method-block">
+    <h3 class="method-title">The executions — what is happening right now</h3>
+    <p style="font-size:14px;color:var(--ink2);margin-bottom:16px;line-height:1.75">Amnesty International describes the current wave as the largest since the 1988 prison massacres.</p>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -4px"><table class="source-table" style="min-width:500px">
+      <thead><tr><th>Name</th><th>Age</th><th>Date</th><th>Charge / note</th></tr></thead>
+      <tbody>
+        <tr><td>Saleh Mohammadi</td><td style="color:var(--red)">19</td><td>Mar 19, 2026</td><td>National wrestling champion. Publicly hanged in Qom. Confessed under torture, recanted in court — court convicted anyway.</td></tr>
+        <tr><td>Saeed Davoudi</td><td style="color:var(--red)">21</td><td>Mar 19, 2026</td><td>Publicly hanged in Qom.</td></tr>
+        <tr><td>Mehdi Ghasemi</td><td style="color:var(--ink3);font-style:italic">not disclosed</td><td>Mar 19, 2026</td><td>Publicly hanged in Qom. Charged with the killing of a second police officer on January 8. No further personal information released by authorities or documented by rights organisations.</td></tr>
+        <tr><td>Amirhossein Hatami</td><td style="color:var(--red)">18</td><td>Apr 2, 2026</td><td>Arrested during January protests. Family says witnesses place him inside a Basij base by accident. Body not returned to family as of Apr 8.</td></tr>
+        <tr><td>Mohammadamin Biglari</td><td style="color:var(--red)">19</td><td>Apr 5, 2026</td><td>Same case. Sentenced within weeks of arrest.</td></tr>
+        <tr><td>Shahin Vahedparast</td><td>30</td><td>Apr 5, 2026</td><td>Same case. Executed same morning as Biglari without family notice. Computer science student Biglari was arrested on his way home from a protest.</td></tr>
+        <tr><td>Ali Fahim</td><td>30</td><td>Apr 6, 2026</td><td>Executed one per day as the prosecutor warned. Same case.</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:14px;padding:16px 18px;background:rgba(224,85,64,.05);border:1px solid rgba(224,85,64,.2);border-radius:8px">
+      <p style="font-size:13px;color:var(--ink2);line-height:1.75"><strong style="color:var(--ink)">Why during a war?</strong> IRGC Chief Justice Mohseni-Ejei stated explicitly: "If we want to do a job, we should do it now — if it becomes late, two months, three months later, it doesn't have the same effect." The executions are timed while the world watches missiles and bombs. The regime knows the war will end. It's trying to make sure the population is too afraid to continue when it does.</p>
+    </div>
+  </div>
+
+  <div style="padding:24px 26px;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;margin-top:8px">
+    <div style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--ink3);margin-bottom:12px">The factor most analysis misses</div>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.8">The Islamic Republic is not one man. It is a system. Removing the man, even the supreme leader, does not remove the system. What removes the system is when the people inside it no longer believe it is worth defending. That is a process of decades, not of strikes. The generation that chanted "Woman, Life, Freedom" understood this intuitively. They were not trying to kill anyone. They were trying to make the system impossible to administer.</p>
+  </div>
+</section>
+
+
+<section class="section" id="sec-simulator">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Tipping point simulator</h2>
+  </div>
+
+  <div class="sim-intro-banner">
+    <div class="sim-intro-icon">⚖️</div>
+    <div class="sim-intro-text"><strong style="color:var(--ink)">Adjust the parameters</strong> and watch how the Nash equilibrium shifts between three outcomes: regime holds, negotiated reform, or collapse. Not a prediction. A way to see the logic of what would need to change.</div>
+  </div>
+
+  <!-- CHART FIRST — comparison context before sliders -->
+  <div style="margin-bottom:36px">
+    <div class="chart-section-header">
+      <div class="chart-section-label">How today compares to history</div>
+      <div class="chart-section-sub">Move the sliders below to update the red shape in real time</div>
+    </div>
+    <div class="chart-wrap">
+      <canvas id="sim-chart" role="img" aria-label="Radar chart comparing current instability factors to historical moments">Radar comparison of instability factors.</canvas>
+    </div>
+    <div class="chart-legend">
+      <span><span style="width:14px;height:3px;border-radius:2px;background:rgba(224,85,64,.9);display:inline-block"></span>Current parameters</span>
+      <span><span style="width:14px;height:3px;border-radius:2px;background:rgba(212,160,23,.7);display:inline-block;opacity:.7"></span>Jan 2026, before April</span>
+      <span><span style="width:14px;height:3px;border-radius:2px;background:rgba(74,144,221,.6);display:inline-block;opacity:.7"></span>1979 revolution</span>
+    </div>
+  </div>
+
+  <!-- SCENARIO BUTTONS -->
+  <div class="sim-label">Load a scenario</div>
+  <div class="sim-scenarios">
+    <button class="scen-btn active-scen" onclick="loadScenario('current2026',this)">April 2026, now</button>
+    <button class="scen-btn" onclick="loadScenario('jan2026',this)">Jan 2026</button>
+    <button class="scen-btn" onclick="loadScenario('oil_crash',this)">Oil price collapses</button>
+    <button class="scen-btn" onclick="loadScenario('irgc_split',this)">IRGC fractures</button>
+    <button class="scen-btn" onclick="loadScenario('mahsa2',this)">New trigger event</button>
+    <button class="scen-btn" onclick="loadScenario('deal',this)">Ceasefire holds</button>
+  </div>
+
+  <!-- SLIDERS -->
+  <div class="slider-grid" id="slider-grid"></div>
+
+  <!-- RESULTS -->
+  <div class="result-panel">
+    <div class="result-top">
+      <div class="result-cell">
+        <div class="result-cell-label">Instability index</div>
+        <div class="result-cell-val" id="res-idx">—</div>
+      </div>
+      <div class="result-cell">
+        <div class="result-cell-label">Kuran threshold</div>
+        <div class="result-cell-val" id="res-kuran">—</div>
+      </div>
+      <div class="result-cell">
+        <div class="result-cell-label">Selectorate stress</div>
+        <div class="result-cell-val" id="res-sel">—</div>
+      </div>
+    </div>
+
+    <div class="eq-title">Nash equilibrium: outcome probabilities</div>
+    <div class="nash-blocks">
+      <div class="nash-block" id="nb-regime" style="background:rgba(237,232,220,.05);border:1px solid rgba(237,232,220,.15)">
+        <div class="nash-block-label" style="color:var(--ink2)">Regime holds</div>
+        <div class="nash-block-pct" id="eqp-regime" style="color:var(--ink)">—</div>
+        <div id="eq-regime" style="display:none"></div>
+      </div>
+      <div class="nash-block" id="nb-reform" style="background:rgba(212,160,23,.07);border:1px solid rgba(212,160,23,.25)">
+        <div class="nash-block-label" style="color:var(--gold)">Reform</div>
+        <div class="nash-block-pct" id="eqp-reform" style="color:var(--gold)">—</div>
+        <div id="eq-reform" style="display:none"></div>
+      </div>
+      <div class="nash-block" id="nb-collapse" style="background:rgba(224,85,64,.07);border:1px solid rgba(224,85,64,.25)">
+        <div class="nash-block-label" style="color:var(--red)">Collapse</div>
+        <div class="nash-block-pct" id="eqp-collapse" style="color:var(--red)">—</div>
+        <div id="eq-collapse" style="display:none"></div>
+      </div>
+    </div>
+
+    <div class="insight-box" id="sim-insight">—</div>
+  </div>
+
+
+  <div style="margin-top:44px;padding-top:36px;border-top:1px solid var(--border)">
+  <!-- WHAT NEEDS TO HAPPEN -->
+  <div class="method-block">
+    <h3 class="method-title">What would actually need to happen</h3>
+    <div id="tipping-viz" style="background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:24px 26px;margin-bottom:20px">
+
+      <!-- Five condition sliders -->
+      <div id="cond-sliders" style="display:flex;flex-direction:column;gap:18px;margin-bottom:28px"></div>
+
+      <!-- Convergence meter -->
+      <div style="border-top:1px solid var(--border);padding-top:20px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <div style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--ink3)">Simultaneous convergence</div>
+          <div id="conv-pct" style="font-family:var(--mono);font-size:13px;color:var(--ink3)">0%</div>
+        </div>
+        <div style="height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;margin-bottom:12px">
+          <div id="conv-bar" style="height:100%;width:0%;border-radius:4px;background:linear-gradient(90deg,var(--red),#ff8040);transition:width .4s ease,background .4s ease"></div>
+        </div>
+        <div id="conv-message" style="font-size:13px;color:var(--ink3);font-style:italic;line-height:1.65;min-height:42px"></div>
+      </div>
+
+      <!-- Chart -->
+      <div style="margin-top:24px;position:relative;height:220px">
+        <canvas id="cond-chart" role="img" aria-label="Radar chart showing five collapse conditions">Five collapse conditions radar chart.</canvas>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:11px;color:var(--ink3)">
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:3px;background:rgba(224,85,64,.8);display:inline-block;border-radius:2px"></span>Your scenario</span>
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:3px;background:rgba(237,232,220,.2);display:inline-block;border-radius:2px"></span>Threshold for collapse</span>
+      </div>
+    </div>
+
+    <!-- Explanation below the chart -->
+    <div style="margin-top:20px;padding:20px 22px;background:var(--bg2);border:1px solid var(--border);border-radius:10px">
+      <p style="font-size:13px;color:var(--ink3);margin-bottom:16px;line-height:1.7">Five conditions. Not one after another. <em>Simultaneously.</em> This simultaneity is exactly what makes the Islamic Republic so durable. Drag the sliders above to explore.</p>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:flex-start;gap:12px;font-size:13px">
+          <span style="font-size:16px;flex-shrink:0;margin-top:1px">💰</span>
+          <div><span style="color:var(--red);font-weight:500">IRGC fiscal collapse</span><span style="color:var(--ink3)">Oil revenues below ~$10bn/year sustained. The IRGC stops getting paid. The loyalty becomes unaffordable.</span></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;font-size:13px">
+          <span style="font-size:16px;flex-shrink:0;margin-top:1px">⚔️</span>
+          <div><span style="color:#4a90d9;font-weight:500">Elite fracture</span><span style="color:var(--ink3)">A senior IRGC commander publicly defects. Not private doubt — a visible, irreversible act. Khamenei's death partially triggered this. Mojtaba has not appeared in person since being named — statements read by TV anchor.</span></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;font-size:13px">
+          <span style="font-size:16px;flex-shrink:0;margin-top:1px">✊</span>
+          <div><span style="color:var(--gold);font-weight:500">Multi-class coalition</span><span style="color:var(--ink3)">Oil workers, bazaar merchants, and urban middle class all in the streets simultaneously. The bazaar joined in January 2026. First time since 1979.</span></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;font-size:13px">
+          <span style="font-size:16px;flex-shrink:0;margin-top:1px">🪖</span>
+          <div><span style="color:#c890d0;font-weight:500">Soldiers refuse orders</span><span style="color:var(--ink3)">Rank-and-file IRGC members stop following commands. The mohareb designation gives religious cover for killing. This brake requires sustained economic stress on military families.</span></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;font-size:13px">
+          <span style="font-size:16px;flex-shrink:0;margin-top:1px">🌍</span>
+          <div><span style="color:#4a9060;font-weight:500">External patron withdraws</span><span style="color:var(--ink3)">China stops buying Iranian oil or Russia withdraws diplomatic cover. Both vetoed the Hormuz resolution. Both benefit from the war continuing.</span></div>
+        </div>
+      </div>
+      <p style="font-size:12px;color:var(--ink3);margin-top:14px;font-style:italic;line-height:1.65">The USSR had all five align simultaneously in 1989–1991. Iran in April 2026 has two partially and one acutely. The question is not whether these conditions can develop — it is whether they develop faster than the regime adapts.</p>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    const conditions = [
+      { key:'fiscal',   label:'IRGC fiscal collapse',    color:'var(--red)',   current:72, note:'Oil revenues compressed by war and sanctions. Not yet breaking — IRGC still paid through evasion networks.' },
+      { key:'elite',    label:'Elite fracture',           color:'#4a90d9',      current:48, note:'Mojtaba Khamenei named March 8, never appeared in person. Intel: incapacitated in Qom. Real power held by IRGC wartime council. First hereditary succession — legitimacy contested internally.' },
+      { key:'coalition',label:'Multi-class coalition',   color:'var(--gold)',   current:38, note:'Bazaar traders joined Jan 2026 — first since 1979. Suppressed. Conditions remain but coordination is cut.' },
+      { key:'soldiers', label:'Soldiers refuse orders',  color:'#c890d0',      current:18, note:'Not visible. Requires economic stress on military families sustained over time. The mohareb mechanism still holds.' },
+      { key:'patron',   label:'External patron withdraws',color:'#4a9060',     current:12, note:'China and Russia both vetoed Hormuz resolution. Both benefit from the war continuing. No withdrawal signals.' },
+    ];
+
+    const threshold = 70; // all need to be above this simultaneously
+
+    // Build sliders
+    const sliderWrap = document.getElementById('cond-sliders');
+    conditions.forEach(c => {
+      const row = document.createElement('div');
+      row.style.cssText = 'display:grid;grid-template-columns:180px 1fr 40px;align-items:center;gap:14px';
+      row.innerHTML = `
+        <div style="font-size:13px;font-weight:500;color:${c.color}">${c.label}</div>
+        <input type="range" min="0" max="100" value="${c.current}" id="cslider-${c.key}"
+               style="-webkit-appearance:none;width:100%;height:4px;background:var(--bg3);border-radius:2px;outline:none;cursor:pointer;accent-color:${c.color}"
+               oninput="window.updateCondViz()">
+        <div id="cval-${c.key}" style="font-family:var(--mono);font-size:12px;color:var(--ink3);text-align:right">${c.current}</div>
+      `;
+      sliderWrap.appendChild(row);
+    });
+
+    // Chart
+    let condChart = null;
+    function initCondChart() {
+      const ctx = document.getElementById('cond-chart');
+      if(!ctx || !window.Chart) return;
+      if(condChart) condChart.destroy();
+      condChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: conditions.map(c => c.label.split(' ').slice(0,2).join(' ')),
+          datasets: [
+            {
+              label: 'Your scenario',
+              data: conditions.map(c => c.current),
+              borderColor: 'rgba(224,85,64,.9)',
+              backgroundColor: 'rgba(224,85,64,.10)',
+              borderWidth: 2,
+              pointRadius: 4,
+              pointBackgroundColor: 'rgba(224,85,64,.9)',
+            },
+            {
+              label: 'Threshold',
+              data: conditions.map(() => threshold),
+              borderColor: 'rgba(237,232,220,.18)',
+              backgroundColor: 'rgba(237,232,220,.03)',
+              borderWidth: 1,
+              pointRadius: 0,
+              borderDash: [4,4],
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            r: {
+              min: 0, max: 100,
+              ticks: { stepSize: 25, font:{size:9,family:"'IBM Plex Mono'"}, color:'rgba(237,232,220,.35)', backdropColor:'transparent' },
+              grid: { color: 'rgba(237,232,220,.08)' },
+              angleLines: { color: 'rgba(237,232,220,.08)' },
+              pointLabels: { font:{size:10,family:"'IBM Plex Sans'"}, color:'rgba(237,232,220,.6)' }
+            }
+          }
+        }
+      });
+    }
+
+    window.updateCondViz = function() {
+      const vals = conditions.map(c => {
+        const v = parseInt(document.getElementById('cslider-'+c.key).value);
+        document.getElementById('cval-'+c.key).textContent = v;
+        return v;
+      });
+
+      // Convergence = geometric mean of how much each exceeds threshold
+      // If any is below threshold, convergence drops sharply
+      const above = vals.filter(v => v >= threshold).length;
+      const minVal = Math.min(...vals);
+      const avgVal = Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
+
+      // Convergence score: penalizes heavily if any condition is low
+      const convergence = Math.round(
+        (above / conditions.length) * 60 +
+        (minVal / 100) * 40
+      );
+
+      document.getElementById('conv-bar').style.width = convergence + '%';
+      document.getElementById('conv-pct').textContent = convergence + '%';
+
+      // Color bar by danger level
+      const barEl = document.getElementById('conv-bar');
+      if(convergence > 75) barEl.style.background = 'linear-gradient(90deg,#c0392b,#e05540)';
+      else if(convergence > 50) barEl.style.background = 'linear-gradient(90deg,#c89a20,#e0a030)';
+      else barEl.style.background = 'linear-gradient(90deg,rgba(224,85,64,.6),rgba(224,85,64,.8))';
+
+      // Message
+      const msg = document.getElementById('conv-message');
+      if(above === 5) {
+        msg.textContent = 'All five conditions above threshold simultaneously. This is the 1979 configuration. History says this is when outcomes become genuinely unpredictable.';
+        msg.style.color = 'var(--red)';
+      } else if(above >= 3) {
+        msg.textContent = `${above} of 5 conditions above threshold. Significant but not yet convergent. The missing conditions are the ones preventing cascade.`;
+        msg.style.color = 'var(--gold)';
+      } else if(above >= 1) {
+        msg.textContent = `${above} of 5 above threshold. The regime holds in this configuration. The IRGC calculus: compliance still costs less than defection.`;
+        msg.style.color = 'var(--ink3)';
+      } else {
+        msg.textContent = 'No conditions above threshold. Stable equilibrium — the regime can manage this level of pressure indefinitely.';
+        msg.style.color = '#4a9060';
+      }
+
+      // Update chart
+      if(condChart) {
+        condChart.data.datasets[0].data = vals;
+        condChart.update('none');
+      }
+    };
+
+    // Init
+    setTimeout(() => {
+      initCondChart();
+      window.updateCondViz();
+    }, 400);
+  })();
+  </script>
+
+
+  </div>
+
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+// Initialize radar chart
+let simChartInst = null;
+
+function initSimChart(){
+  const ctx = document.getElementById('sim-chart');
+  if(!ctx||!window.Chart) return;
+  if(simChartInst) simChartInst.destroy();
+  simChartInst = new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['Economic', 'Sanctions', 'Military shock', 'Mobilisation', 'Elite fracture', 'Coalition'],
+      datasets: [
+        {
+          label: 'Current Apr 2026',
+          data: [94,85,95,72,78,48],
+          borderColor: 'rgba(192,57,43,.8)',
+          backgroundColor: 'rgba(192,57,43,.08)',
+          borderWidth: 2,
+          pointRadius: 3,
+          pointBackgroundColor: 'rgba(192,57,43,.8)',
+          borderDash: []
+        },
+        {
+          label: 'Jan 2026, before April',
+          data: [90,80,10,88,35,55],
+          borderColor: 'rgba(184,134,11,.7)',
+          backgroundColor: 'rgba(184,134,11,.06)',
+          borderWidth: 1.5,
+          pointRadius: 2,
+          pointBackgroundColor: 'rgba(184,134,11,.7)',
+          borderDash: [4,3]
+        },
+        {
+          label: '1979 revolution',
+          data: [85,20,15,92,88,90],
+          borderColor: 'rgba(55,138,221,.6)',
+          backgroundColor: 'rgba(55,138,221,.05)',
+          borderWidth: 1.5,
+          pointRadius: 2,
+          pointBackgroundColor: 'rgba(55,138,221,.6)',
+          borderDash: [2,4]
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        r: {
+          min: 0, max: 100,
+          ticks: { stepSize: 25, font: { size: 10, family: "'IBM Plex Mono'" }, color: '#8a8070', backdropColor: 'transparent' },
+          grid: { color: 'rgba(237,232,220,.10)' },
+          angleLines: { color: 'rgba(237,232,220,.10)' },
+          pointLabels: { font: { size: 11, family: "'IBM Plex Sans'" }, color: '#f0ebe0' }
+        }
+      }
+    }
+  });
+}
+
+// Update radar when sliders change
+function updateRadar(){
+  if(!simChartInst) return;
+  const get = k => parseInt(document.getElementById('sl-'+k).value);
+  simChartInst.data.datasets[0].data = [
+    get('econ'), get('sanc'), get('ext'), get('mob'), get('mil'), get('coord')
+  ];
+  simChartInst.update('none');
+}
+
+// Initialize after page loads
+window.addEventListener('load', () => {
+  setTimeout(initSimChart, 300);
+});
+</script>
+
+<!-- ══ HISTORY ══ -->
+<section class="section" id="sec-history">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Iran since 1979</h2>
+    
+  </div>
+
+  <p style="font-size:14px;color:var(--ink2);margin-bottom:36px;line-height:1.75;">Each moment in the timeline shows what the factors looked like and what happened next.</p>
+
+  <div class="tl-wrap">
+    <div class="tl-spine"></div>
+
+    <div class="tl-item">
+      <div class="tl-dot major"></div>
+      <div class="tl-year">1979</div>
+      <div class="tl-title">The Islamic Revolution</div>
+      <div class="tl-desc">The Shah's rapid modernisation alienated clergy and bazaari merchants simultaneously. Oil wealth had created deep inequality. Carter's human rights pressure weakened repression signals. A cross-class coalition: clergy, leftists, liberals, unified against a single target. Crucially: the military refused orders to fire on protesters.</div>
+      <div class="tl-tags">
+        <span class="tl-tag">Economic inequality</span>
+        <span class="tl-tag">Cross-class coalition</span>
+        <span class="tl-tag red">Military defection</span>
+        <span class="tl-tag dark">Full collapse</span>
+      </div>
+      <div class="tl-parallel">Today: economic grievances are higher than in 1979. But the IRGC has structural incentives the Shah's army did not, they own businesses, control smuggling routes. Their loyalty is bought, not conscripted.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">1999</div>
+      <div class="tl-title">Student uprising</div>
+      <div class="tl-desc">Student dormitories raided by Ansar Hezbollah paramilitary. Protests spread to 18 cities within days. The IRGC issued a direct letter warning they would "end the political game." Students had no broader coalition. Workers, clergy, and merchants did not join. Suppressed within a week.</div>
+      <div class="tl-tags">
+        <span class="tl-tag">Student-led only</span>
+        <span class="tl-tag red">IRGC direct threat</span>
+        <span class="tl-tag">No coalition</span>
+        <span class="tl-tag dark">Suppressed</span>
+      </div>
+      <div class="tl-parallel">Key lesson: breadth of coalition matters more than intensity of protest. One class alone cannot tip the equilibrium.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot major"></div>
+      <div class="tl-year">2009</div>
+      <div class="tl-title">The Green Movement</div>
+      <div class="tl-desc">Disputed presidential election: Mousavi against Ahmadinejad. Millions in the streets. The largest protests since 1979. International attention. The regime used Basij militia and internet blackouts. Leaders Mousavi and Karroubi placed under house arrest. They remain there to this day.</div>
+      <div class="tl-tags">
+        <span class="tl-tag">Millions mobilised</span>
+        <span class="tl-tag">International attention</span>
+        <span class="tl-tag red">No security defections</span>
+        <span class="tl-tag dark">Suppressed</span>
+      </div>
+      <div class="tl-parallel">Had leadership and mass numbers, both factors Kuran's model predicts matter. But zero defections inside the security apparatus. The IRGC did not waver once.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2019</div>
+      <div class="tl-title">Bloody November</div>
+      <div class="tl-desc">Fuel price tripled overnight. Spontaneous protests erupted across 29 provinces within 24 hours, faster than any previous movement. Internet cut for 5 days. Security forces killed over 1,500 protesters, according to a Reuters investigation. No organised leadership, no coordination possible.</div>
+      <div class="tl-tags">
+        <span class="tl-tag">Economic trigger</span>
+        <span class="tl-tag">29 provinces simultaneous</span>
+        <span class="tl-tag red">1,500+ killed</span>
+        <span class="tl-tag">Internet blackout</span>
+        <span class="tl-tag dark">Suppressed</span>
+      </div>
+      <div class="tl-parallel">The regime will use lethal force at scale. The internet blackout is a primary tool, not a side effect. It prevents the coordination that Kuran's model requires for preference revelation to cascade.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot major"></div>
+      <div class="tl-year">2022–23</div>
+      <div class="tl-title">Woman, Life, Freedom</div>
+      <div class="tl-desc">Mahsa Amini, 22, Kurdish, died in morality police custody September 16. Protests erupted the same day across all 31 provinces. Schoolgirls at the forefront, removing hijabs publicly. The slogan "Woman, Life, Freedom" directly challenged theocratic rule for the first time since 1979. Spread across ethnic lines: Kurds, Baluchis, Azeris, Persians. UN Fact-Finding Mission confirmed Iran responsible and found the crackdown constituted crimes against humanity. Over 500 killed, 22,000+ detained. At least 10 executed in connection with the protests as of 2024.</div>
+      <div class="tl-tags">
+        <span class="tl-tag">Cross-ethnic</span>
+        <span class="tl-tag">Women-led</span>
+        <span class="tl-tag dark">Anti-theocracy slogan</span>
+        <span class="tl-tag red">500+ killed · UN confirmed</span>
+        <span class="tl-tag red">22,000+ detained</span>
+      </div>
+      <div class="tl-parallel">The most significant movement since 1979. What was missing: no organised strike wave from oil workers (who brought down the Shah), no IRGC defections. The two structural factors Goldstone identifies as necessary were absent.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot major"></div>
+      <div class="tl-year">Dec 2025, Jan 2026</div>
+      <div class="tl-title">The January uprising</div>
+      <div class="tl-desc">Started December 28, 2025 when bazaar traders in Tehran's Grand Bazaar closed shops after a sharp currency collapse. For the first time since 1979, the merchant class joined the protests. Spread to all 31 provinces and 220+ cities. On January 8–9, security forces carried out mass killings across Iran. The internet was cut completely on January 8, at the exact moment the killing reached its peak, making independent documentation nearly impossible. IHRNGO confirmed a minimum of 3,428 killed based on hospital and morgue documentation cross-referenced with two independent sources per case. HRANA documented 7,007 deaths by name. Local health officials cited by Time, The Guardian, and Iran International reported between 30,000 and 36,500 killed in those two days. Some estimates reach 40,000. The Iranian government has published no figures. 51,790 people were arrested (HRANA). Bodies were taken from hospitals by security forces. Families were prevented from burying their dead. Mass burials were reported. Doctors who treated wounded protesters were arrested.</div>
+      <div class="tl-tags">
+        <span class="tl-tag dark">Bazaar traders joined, first since 1979</span>
+        <span class="tl-tag red">3,400–40,000 killed</span>
+        <span class="tl-tag red">51,790 arrested</span>
+        <span class="tl-tag">220+ cities</span>
+        <span class="tl-tag">31 provinces</span>
+        <span class="tl-tag">Internet cut Jan 8</span>
+      </div>
+      <div class="tl-parallel">Why such a wide range: the internet blackout was imposed precisely when the killing was most intense. Bodies were removed before they could be counted. The lower figure (3,428) is what could be documented despite everything. The higher figures (30,000–40,000) come from health officials inside Iran who had access to morgue data before it was seized. Both the low and the high numbers are significant. The regime's refusal to publish any figure is itself a figure.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot current"></div>
+      <div class="tl-year">Feb 2026, now</div>
+      <div class="tl-title">External shock</div>
+      <div class="tl-desc">Raisi killed in helicopter crash, May 2024. Reformist Pezeshkian elected president, but Khamenei holds all real power. Hezbollah severely weakened in Lebanon. Hamas weakened in Gaza. February 28, 2026: Khamenei killed in joint US-Israeli strikes on Tehran. Iranian state media confirms his death. 40 days of mourning declared. His daughter, son-in-law and grandchild also killed. Celebrations in Tehran, Karaj, Isfahan. Mourning elsewhere. March 8: Assembly of Experts names Mojtaba Khamenei new supreme leader — first hereditary succession in the Republic's 47-year history. He has not appeared publicly since. Statements attributed to him are read by TV anchors over a still photograph. Intelligence memos cited by The Times report he is incapacitated in Qom, in severe condition, unable to participate in decision-making. Real power held by an IRGC wartime council: Mohsen Rezaei, Ahmad Vahidi, Ghalibaf. A three-person interim council holds power: President Pezeshkian, Chief Justice Mohseni-Ejei, senior cleric Arafi. Airspace closed. Imam Khomeini airport effectively shut. Strait of Hormuz crisis. Ceasefire framework announced April 7, 2026, fragile.</div>
+      <div class="tl-tags">
+        <span class="tl-tag red">Khamenei killed</span>
+        <span class="tl-tag red">Active conflict</span>
+        <span class="tl-tag dark">Succession crisis</span>
+        <span class="tl-tag">Proxy losses</span>
+        <span class="tl-tag">Fiscal crisis</span>
+        <span class="tl-tag">Ceasefire, fragile</span>
+      </div>
+      <div class="tl-parallel">The death of the supreme leader is the single most significant event since 1979. Mojtaba Khamenei was named March 8 — but has never appeared in public. His statements are read by TV anchors. Intelligence reports cite him as incapacitated in Qom. The IRGC wartime council (Rezaei, Vahidi, Ghalibaf) holds real power. Goldstone's first condition — elite defection — is now partially triggered. Whether the succession holds or fractures is the central question of this moment.</div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:40px;padding-top:36px;border-top:1px solid var(--border)">
+    <div style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--ink3);margin-bottom:16px">What the timeline adds up to</div>
+    <p style="font-size:15px;color:var(--ink);font-family:var(--serif);margin-bottom:20px;line-height:1.7;font-weight:400">Jack Goldstone studied 500 years of revolutions and found three conditions appear together in nearly every case of state collapse.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:24px">
+      <div style="background:var(--bg2);border:1px solid var(--border2);border-top:3px solid #4a90d9;border-radius:8px;padding:16px 18px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:var(--mono);font-size:10px;color:#4a90d9;text-transform:uppercase;letter-spacing:.8px">Elite defection</div>
+        <div style="font-size:13px;color:var(--ink2);line-height:1.7;flex:1">Security commanders stop following orders. Not private doubt — visible, irreversible public acts.</div>
+        <div style="font-family:var(--mono);font-size:10px;padding:4px 8px;background:rgba(212,160,23,.1);border:1px solid rgba(212,160,23,.3);border-radius:4px;color:var(--gold);display:inline-block;width:fit-content">Partially triggered</div>
+        <div style="font-size:12px;color:var(--ink3);line-height:1.6">Mojtaba Khamenei named March 8. Never appeared in person — statements read by TV anchor. Intel memos cite him as incapacitated in Qom. Real power held by IRGC wartime council of Rezaei, Vahidi, Ghalibaf.</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border2);border-top:3px solid var(--gold);border-radius:8px;padding:16px 18px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:.8px">Multi-class coalition</div>
+        <div style="font-size:13px;color:var(--ink2);line-height:1.7;flex:1">Workers, merchants, and middle class in the streets simultaneously. 1979 had all three.</div>
+        <div style="font-family:var(--mono);font-size:10px;padding:4px 8px;background:rgba(212,160,23,.1);border:1px solid rgba(212,160,23,.3);border-radius:4px;color:var(--gold);display:inline-block;width:fit-content">Developing</div>
+        <div style="font-size:12px;color:var(--ink3);line-height:1.6">Bazaar traders joined Jan 2026 — first since 1979. Suppressed. But the economic conditions that brought them out remain.</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border2);border-top:3px solid var(--red);border-radius:8px;padding:16px 18px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--red);text-transform:uppercase;letter-spacing:.8px">Fiscal crisis</div>
+        <div style="font-size:13px;color:var(--ink2);line-height:1.7;flex:1">The regime cannot pay its security forces. The IRGC's loyalty becomes unaffordable.</div>
+        <div style="font-family:var(--mono);font-size:10px;padding:4px 8px;background:rgba(224,85,64,.1);border:1px solid rgba(224,85,64,.3);border-radius:4px;color:var(--red);display:inline-block;width:fit-content">Acute</div>
+        <div style="font-size:12px;color:var(--ink3);line-height:1.6">Oil revenues compressed by war and sanctions. Not yet breaking — IRGC still paid through evasion. But the margin is narrowing.</div>
+      </div>
+    </div>
+    <div style="padding:16px 20px;background:var(--bg2);border:1px solid var(--border2);border-radius:8px">
+      <p style="font-size:14px;color:var(--ink2);line-height:1.8">All three conditions are now present in partial form simultaneously. That has never happened before in the history of the Islamic Republic. Each of the six moments in this timeline produced one or two conditions. None produced all three at once. April 2026 is the first time all three are active together — even if none is fully developed. The question is not whether they can converge. It is whether they converge faster than the regime adapts.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ METHODOLOGY ══ -->
+<section class="section" id="sec-method">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <h2 class="section-title">Sources & methodology</h2>
+    
+  </div>
+
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;margin-bottom:28px;flex-wrap:wrap;gap:8px">
+    <div style="font-family:var(--mono);font-size:11px;color:var(--ink3)">
+      <span style="color:var(--ink2)">Last updated:</span> April 9, 2026
+    </div>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--ink3)">
+      Updated every 7–10 days · Not a live feed
+    </div>
+  </div>
+    <div style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--red);margin-bottom:14px">On the numbers: ranges, not single figures</div>
+    <p style="margin-bottom:12px;font-size:14px;color:var(--ink2);line-height:1.8"><span style="color:var(--ink);font-weight:500">Every death toll, arrest figure, and economic statistic on this site comes with a range rather than a single number. This is not evasion. It is honesty.</span></p>
+    <p style="margin-bottom:12px;font-size:14px;color:var(--ink2);line-height:1.8">The Iranian government does not publish casualty figures, protest arrest numbers, or execution counts that can be independently verified. It controls access to hospitals, morgues, and prisons. It cuts the internet at the moment repression intensifies, not by accident, but as a documented deliberate strategy to prevent documentation.</p>
+    <p style="margin-bottom:12px;font-size:14px;color:var(--ink2);line-height:1.8">The lower figures on this site (for example, 3,428 killed in January 2026) represent what human rights organisations could document by name, with two independent sources per case, through the blackout. The higher figures (30,000–40,000) come from health officials inside Iran who had access to institutional data before it was seized. Both are real. The truth is somewhere in between, and the regime has made it impossible to know where.</p>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.8">When a government kills people and then makes it impossible to count them, the count itself becomes an act of resistance. HRANA, IHRNGO, Amnesty International, and Human Rights Watch do this work under extreme conditions. These numbers are the most rigorous available — not because they are certain, but because they are the most verified.</p>
+  </div>
+
+  <div class="method-block">
+    <h3 class="method-title">The models</h3>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">
+      <div style="background:var(--bg2);border:1px solid var(--border2);border-left:3px solid #4a90d9;border-radius:8px;padding:16px 18px">
+        <div style="font-family:var(--mono);font-size:10px;color:#4a90d9;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Nash Equilibrium</div>
+        <div style="font-size:14px;color:var(--ink2);line-height:1.75">Each actor — regime, IRGC, population — chooses the strategy best given what others are doing. The regime "holds" as long as the IRGC's best response is compliance. This shifts when the cost of compliance exceeds the cost of defection: depends on fiscal capacity and perceived future safety.</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border2);border-left:3px solid var(--gold);border-radius:8px;padding:16px 18px">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Kuran — Preference Falsification (1995)</div>
+        <div style="font-size:14px;color:var(--ink2);line-height:1.75">People hide their real preferences under authoritarian regimes. When enough people privately disagree but publicly comply, a single trigger can cascade into mass mobilisation faster than any model predicts. The "hidden threshold" in the simulator estimates this gap.</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border2);border-left:3px solid #4a9060;border-radius:8px;padding:16px 18px">
+        <div style="font-family:var(--mono);font-size:10px;color:#4a9060;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Goldstone — Structural-Demographic Theory</div>
+        <div style="font-size:14px;color:var(--ink2);line-height:1.75">Three structural conditions precede nearly all historical state collapses: <span style="color:var(--ink);font-weight:500">elite defection</span>, <span style="color:var(--ink);font-weight:500">multi-class coalition</span>, <span style="color:var(--ink);font-weight:500">fiscal crisis</span>. Used here to score the presence or absence of each precondition.</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border2);border-left:3px solid var(--red);border-radius:8px;padding:16px 18px">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--red);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Bueno de Mesquita — Selectorate Theory</div>
+        <div style="font-size:14px;color:var(--ink2);line-height:1.75">A regime survives by paying a "winning coalition" — in Iran's case: the IRGC and its business network, ~$12–20bn annually from oil and smuggling. When revenue falls below the cost of maintaining this coalition, the coalition has incentive to defect.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="method-block">
+    <h3 class="method-title">Sources</h3>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -4px"><table class="source-table" style="min-width:500px">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Source</th>
+          <th>Honest limitation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Deaths Jan 2026, documented minimum</td><td><a href="https://iranhr.net" target="_blank">IHRNGO</a> · <a href="https://en.hrana.org" target="_blank">HRANA</a></td><td>Named cases only. Internet blackout means lower bound. Real toll is higher, we cannot know by how much.</td></tr>
+        <tr><td>Deaths Jan 2026, institutional estimates</td><td>Health officials via <a href="https://time.com" target="_blank">Time</a> · <a href="https://theguardian.com" target="_blank">Guardian</a> · Iran Intl</td><td>30,000–40,000. Cannot be independently verified. Sources spoke anonymously at personal risk.</td></tr>
+        <tr><td>Political prisoners &amp; executions</td><td><a href="https://iranrights.org/omid" target="_blank">Boroumand Center, OMID</a> · <a href="https://iranhr.net" target="_blank">IHRNGO</a></td><td>Only cases that reached outside. Many secret executions never appear. Iran executed at least 1,500 in 2025, this is the announced figure.</td></tr>
+        <tr><td>Economic data</td><td><a href="https://imf.org" target="_blank">IMF Iran Country Report</a></td><td>Official figures are systematically understated. Real inflation and unemployment are worse than published.</td></tr>
+        <tr><td>Rial exchange rate</td><td><a href="https://bonbast.com" target="_blank">Bonbast.com</a></td><td>Unofficial black market rate. More accurate than official, but reflects informal economy only.</td></tr>
+        <tr><td>Current conflict, April 2026</td><td><a href="https://iranintl.com" target="_blank">Iran International</a> · <a href="https://time.com" target="_blank">TIME</a> · FlightAware</td><td>Situation changes daily. This site is updated every 7–10 days. Last updated: April 9, 2026. Check primary sources for breaking developments.</td></tr>
+        <tr><td>Historical events 1906–2008</td><td style="color:var(--red)">Ervand Abrahamian, <em>A History of Modern Iran</em> (2008)</td><td>Standard academic reference. Widely accepted as authoritative.</td></tr>
+        <tr><td>Political science models</td><td style="color:var(--red)">Goldstone (2001) · Kuran (1995) · Bueno de Mesquita (2003) · Geddes (2014)</td><td>Built on historical cases. Iran may not conform. No model has reliably predicted revolutions. Use as a lens, not a forecast.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="honest-note" style="border-color:rgba(237,232,220,.25)">
+    <div class="honest-note-title" style="color:var(--ink);font-size:12px;letter-spacing:.8px">What this can and cannot do</div>
+    <p style="margin-bottom:12px;font-size:14px;line-height:1.8;color:var(--ink2)">No model can tell you what will happen. The researchers who built the best political science models have predicted revolutions no better than chance. One soldier who refuses an order. One video that reaches the right person. Any of these can change everything.</p>
+    <p style="font-size:14px;line-height:1.8;color:var(--ink2)">What this does is show the structure. The forces in play. The historical parallels. The conditions that came before change in the past, and whether they are present now. Not comfort. Something real.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-farsi">فردا روز دیگری است</div>
+    <div class="footer-en">Tomorrow is another day &nbsp;·&nbsp; doostam</div>
+  </div>
+</footer>
+
+<script>
+// ── DATA ──
+const factors = [
+  { name: 'Economic pressure',       score: 94, color: '#e05540', trend: '↑', src: 'IMF · Bonbast.com · Dec 2025 currency collapse' },
+  { name: 'Sanctions intensity',     score: 85, color: '#c0392b', trend: '↑', src: 'US Treasury · EU Council' },
+  { name: 'External military shock', score: 95, color: '#e05540', trend: '↑', src: 'FlightAware · Iran Intl · April 2026' },
+  { name: 'Street mobilisation',     score: 72, color: '#c0392b', trend: '↑', src: 'HRANA 7,007+ killed Jan 2026 · 220+ cities · 51,790 arrested' },
+  { name: 'Leadership fracture',     score: 78, color: '#c0392b', trend: '↑', src: 'Khamenei killed · Mojtaba unseen · IRGC consolidating' },
+  { name: 'Multi-class coalition',   score: 48, color: '#b8860b', trend: '↑', src: 'Bazaar traders joined Jan 2026, first time since 1979' },
+];
+
+const scenarios = {
+  current2025:  { econ:82, sanc:75, ext:45, mob:42, mil:30, coord:35 },
+  current2026:  { econ:94, sanc:85, ext:95, mob:72, mil:78, coord:48 },
+  jan2026:      { econ:90, sanc:80, ext:10, mob:88, mil:35, coord:55 },
+  oil_crash:    { econ:96, sanc:85, ext:90, mob:70, mil:25, coord:55 },
+  irgc_split:   { econ:88, sanc:82, ext:85, mob:72, mil:80, coord:65 },
+  mahsa2:       { econ:90, sanc:85, ext:80, mob:88, mil:35, coord:75 },
+  deal:         { econ:55, sanc:30, ext:20, mob:22, mil:22, coord:18 },
+};
+
+const sliderDefs = [
+  { key:'econ',  name:'Economic collapse',       src:'IMF · Bonbast.com · Dec 2025 currency' },
+  { key:'sanc',  name:'Sanctions pressure',      src:'US Treasury · EU Council' },
+  { key:'ext',   name:'External military shock', src:'FlightAware · April 2026' },
+  { key:'mob',   name:'Street mobilisation',     src:'HRANA · IHRNGO · Jan 2026' },
+  { key:'mil',   name:'Leadership fracture',     src:'Succession crisis · Goldstone' },
+  { key:'coord', name:'Multi-class coalition',   src:'Bazaar traders + youth · Kuran 1995' },
+];
+
+// ── RENDER INDEX ──
+function renderIndex() {
+  const list = document.getElementById('factor-list');
+  if(!list) return;
+  let html = '';
+  factors.forEach(f => {
+    const tColor = f.trend==='↑'?'#c0392b':f.trend==='↓'?'#3b6d11':'#888780';
+    html += `<div class="factor-row">
+      <div class="factor-info">
+        <div class="factor-name">${f.name}</div>
+        <div class="factor-bar-outer"><div class="factor-bar-inner" style="width:0%;background:${f.color}" data-w="${f.score}%"></div></div>
+        <div class="factor-src">${f.src}</div>
+      </div>
+      <div class="factor-right">
+        <span class="factor-num" style="color:${f.color}">${f.score}</span>
+        <span class="factor-trend" style="color:${tColor}">${f.trend}</span>
+      </div>
+    </div>`;
+  });
+  list.innerHTML = html;
+
+  const avg = Math.min(100, Math.round(factors.reduce((s,f)=>s+f.score,0)/factors.length));
+  const stateLabel = avg > 85 ? 'Critical zone' : avg > 70 ? 'High instability' : avg > 55 ? 'Elevated pressure' : 'Contested';
+  const stateColor = avg > 85 ? '#c0392b' : avg > 70 ? '#BA7517' : avg > 55 ? '#b8860b' : '#8a8070';
+
+  setTimeout(() => {
+    document.querySelectorAll('.factor-bar-inner').forEach(el => { el.style.width = el.dataset.w; });
+    const gf = document.getElementById('idx-gauge-fill');
+    if(gf) gf.style.width = avg + '%';
+    document.getElementById('idx-composite').textContent = avg + '/100';
+    document.getElementById('idx-composite').style.color = stateColor;
+    document.getElementById('idx-state-label').textContent = stateLabel;
+    document.getElementById('idx-nash').textContent = avg > 75 ? 'Critically unstable' : avg > 55 ? 'Contested' : 'Stable';
+    document.getElementById('idx-fiscal').textContent = 'Critical';
+    document.getElementById('idx-goldstone').textContent = '2.5 / 3';
+  }, 150);
+}
+
+// ── RENDER SLIDERS ──
+function renderSliders() {
+  const wrap = document.getElementById('slider-grid');
+  if(!wrap) return;
+  const colors = {
+    econ:  'var(--red)',
+    sanc:  '#c890d0',
+    ext:   '#e08040',
+    mob:   'var(--gold)',
+    mil:   '#4a90d9',
+    coord: '#4a9060'
+  };
+  let html = '';
+  sliderDefs.forEach(s => {
+    const c = colors[s.key] || 'var(--ink2)';
+    html += `<div class="slider-row">
+      <div class="sl-name" style="color:${c}">${s.name}<span class="sl-src">${s.src}</span></div>
+      <input type="range" min="0" max="100" step="1" id="sl-${s.key}" value="50" oninput="updateSim()">
+      <div class="sl-val" id="sv-${s.key}">50</div>
+    </div>`;
+  });
+  wrap.innerHTML = html;
+}
+
+// ── LOAD SCENARIO ──
+function loadScenario(key, btn) {
+  document.querySelectorAll('.scen-btn').forEach(b => b.classList.remove('active-scen'));
+  btn.classList.add('active-scen');
+  const s = scenarios[key];
+  Object.keys(s).forEach(k => {
+    const el = document.getElementById('sl-'+k);
+    const vl = document.getElementById('sv-'+k);
+    if(el){ el.value = s[k]; vl.textContent = s[k]; }
+  });
+  updateSim();
+}
+
+// ── UPDATE SIMULATION ──
+function updateSim() {
+  const get = k => parseInt(document.getElementById('sl-'+k).value);
+  sliderDefs.forEach(s => {
+    document.getElementById('sv-'+s.key).textContent = get(s.key);
+  });
+
+  const econ=get('econ'), sanc=get('sanc'), ext=get('ext'),
+        mob=get('mob'), mil=get('mil'), coord=get('coord');
+
+  // Instability index — weighted sum based on Goldstone/Bueno de Mesquita weights
+  // External shock weighted highest because it's the most acute variable right now
+  // Coalition weighted less because it's still developing
+  const idx = Math.min(100, Math.round(
+    econ*0.20 + sanc*0.15 + ext*0.22 + mob*0.18 + mil*0.15 + coord*0.10
+  ));
+
+  // Kuran hidden threshold — how large is the gap between private discontent and public action
+  // High econ + sanc = high private discontent. High coord = people starting to act on it.
+  // Clamped 0-95. Negative means people are still hiding their true preferences.
+  const kuran = Math.min(95, Math.max(0, Math.round(
+    (econ*0.35 + sanc*0.25 + mob*0.25) - ((100 - coord)*0.15) - 10
+  )));
+
+  // Selectorate stress — can the regime still pay the IRGC?
+  // Driven by oil revenues = econ pressure + sanctions + external disruption
+  const sel = Math.min(98, Math.max(0, Math.round(
+    econ*0.45 + sanc*0.40 + ext*0.15 - 10
+  )));
+
+  document.getElementById('res-idx').textContent = idx + '/100';
+  document.getElementById('res-kuran').textContent = kuran + '%';
+  document.getElementById('res-sel').textContent = sel + '%';
+
+  // Nash equilibrium probabilities
+  // Collapse requires: elite fracture (mil) + mobilisation (mob) + coordination (coord)
+  // Reform requires: international pressure (sanc) + some mobilisation, without full elite fracture
+  // Regime holds: the default when the above don't align
+  const milF = mil/100, coordF = coord/100, econF = econ/100, extF = ext/100, mobF = mob/100;
+
+  // Collapse: needs all three Goldstone conditions partially met
+  let collapse = Math.round(Math.min(88, Math.max(2,
+    (milF*0.35 + coordF*0.30 + mobF*0.20 + extF*0.15) * (idx/100) * 100
+  )));
+
+  // Reform: international pressure creates space, but regime must feel it can survive reform
+  // Less likely when external shock is very high (regime goes defensive)
+  let reform = Math.round(Math.min(40, Math.max(3,
+    (sanc/100)*20 + (mob/100)*12 - milF*6 - extF*8 + 8
+  )));
+
+  // Regime holds: the remainder, the default
+  let regime = Math.max(5, 100 - collapse - reform);
+  const tot = collapse + reform + regime;
+  collapse = Math.round(collapse/tot*100);
+  reform = Math.round(reform/tot*100);
+  regime = 100 - collapse - reform;
+
+  document.getElementById('eqp-regime').textContent = regime+'%';
+  document.getElementById('eqp-reform').textContent = reform+'%';
+  document.getElementById('eqp-collapse').textContent = collapse+'%';
+
+  // Visually scale the blocks by opacity/size to reflect dominance
+  const nbR = document.getElementById('nb-regime');
+  const nbF = document.getElementById('nb-reform');
+  const nbC = document.getElementById('nb-collapse');
+  if(nbR){
+    nbR.style.opacity = 0.4 + regime/100 * 0.6;
+    nbF.style.opacity = 0.4 + reform/100 * 0.6;
+    nbC.style.opacity = 0.4 + collapse/100 * 0.6;
+    // Highlight dominant
+    [nbR,nbF,nbC].forEach(b=>b.style.transform='scale(1)');
+    const dom = regime>=reform&&regime>=collapse?nbR:collapse>=reform?nbC:nbF;
+    dom.style.transform='scale(1.04)';
+  }
+
+  // Insight, in plain language, what the model is actually saying
+  let insight = '';
+  if(mil > 65 && mob > 65 && coord > 55)
+    insight = 'All three of Goldstone\'s conditions are converging. This is the 1979 configuration. History says this is when things become genuinely unpredictable.';
+  else if(mil > 65 && mob < 40)
+    insight = 'Elite fracture without street mobilisation. This is where negotiations sometimes happen quietly. Not collapse, but possible transition.';
+  else if(ext > 80 && econ > 85 && mil < 50)
+    insight = 'Massive external and economic pressure, but the IRGC is still holding. The rally-around-the-flag effect is real. External shocks sometimes strengthen regimes short-term, then weaken them when the shock fades.';
+  else if(coord > 60 && mob > 70)
+    insight = 'When people start acting on their real preferences openly: Kuran\'s cascade threshold. The dynamic shifts faster than any model predicts.';
+  else if(get('sanc') < 25 && ext < 20)
+    insight = 'With external pressure off, the regime gets fiscal breathing room. The IRGC gets paid. Mobilisation historically drops when economic conditions improve even slightly.';
+  else
+    insight = 'The IRGC calculus right now: defection means losing everything: wealth, safety, future. Compliance means keeping it. That calculation holds until enough commanders see the regime as more dangerous to their future than rebellion. Not there yet. But the variables are moving.';
+
+  document.getElementById('sim-insight').textContent = insight;
+
+  // Update radar chart if it exists
+  if(typeof updateRadar === 'function') updateRadar();
+}
+
+// ── NAVIGATION ──
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── INIT ──
+renderIndex();
+renderSliders();
+loadScenario('current2026', document.querySelector('.scen-btn'));
+setTimeout(() => {
+  document.querySelectorAll('.factor-fill').forEach(el => { el.style.width = el.dataset.w; });
+}, 400);
+</script>
+</body>
+</html>
